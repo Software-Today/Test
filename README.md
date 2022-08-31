@@ -68,13 +68,3 @@
 |      /questions/:id           | question: { body }
 
 | /questions/:question_id/answers  | commment: { body }
-```
-
-Check out [test.sh](api_test.sh) or [test.rb](test.rb) file.
-
-**NB:** You need to pass authorization token through header to do **post**, **patch** and **delete** operations. Get(read) operation does not need authorization token.
-
-***Test***
-```
-  $ rails test
-```
