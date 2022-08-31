@@ -1,10 +1,10 @@
 first:
-  user: leecrey
+  user: brett
   title: hello world
-  content: this is test content
+  body: this is test.
 
 
 second:
   user: david
-  title: my very first post
-  content: Valid with wrong confirmation password
+  title: my very first question
+  body: Valid with wrong confirmation password

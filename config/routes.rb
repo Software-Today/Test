@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'login' => 'authentication#create'
   delete 'users' => 'registration#destroy'
 
-  resources :posts do
-    resources :comments, shallow: true
+  resources :questions do
+    resources :answers, shallow: true
   end
 end

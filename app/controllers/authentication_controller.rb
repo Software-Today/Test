@@ -10,7 +10,7 @@ class AuthenticationController < ApplicationController
       crypt_msg = MessageEncrypt.new.encrypt(token)
       render json: { authorization: crypt_msg }
     else
-      render json: { error: 'Incorrect username or password' }, status: :unauthorized
+      render json: { error: 'Incorrect email or password' }, status: :unauthorized
     end
   end
 

@@ -1,28 +1,28 @@
 require 'test_helper'
 
-class CommentTest < ActiveSupport::TestCase
+class AnswerTest < ActiveSupport::TestCase
   setup do
     @lee_crey = users(:leecrey)
-    @post = posts(:first)
-    @comment = Comment.new
+    @question = questions(:first)
+    @answer = Answer.new
   end
 
   test 'it should not be valid' do
-    assert_not @comment.valid?, 'it is valid but it should not be'
+    assert_not @answer.valid?, 'it is valid but it should not be'
 
-    @comment.user_id = @lee_crey.id
-    assert_not @comment.valid?, 'it is valid but it should not be'
+    @answer.user_id = @lee_crey.id
+    assert_not @answer.valid?, 'it is valid but it should not be'
 
-    @comment.content = %(Et in id optio ab aliquam fuga nam debitis dolores eveniet)
-    assert_not @comment.valid?
+    @answer.body = %(Et in id optio ab aliquam fuga nam debitis dolores eveniet)
+    assert_not @answer.valid?
   end
 
   test 'it should be valid' do
-    @comment.user_id = @lee_crey.id
-    @comment.post_id = @post.id
-    @comment.content = %(Et in id optio ab aliquam fuga nam debitis dolores eveniet)
+    @answer.user_id = @lee_crey.id
+    @answer.question_id = @question.id
+    @answer.body = %(Et in id optio ab aliquam fuga nam debitis dolores eveniet)
 
-    assert @comment.valid?
-    assert @comment.save
+    assert @answer.valid?
+    assert @answer.save
   end
 end

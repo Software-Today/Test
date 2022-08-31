@@ -16,7 +16,7 @@ module ApplicationConcern
     raise UnauthorizedException unless @current_user
   end
 
-  # resource can be either post, comment, reply
+  # resource can be either question, answer, reply
   def check_user_permission_for(resource)
     raise UnpermittedException if @current_user.id != resource.user_id
 
@@ -28,6 +28,6 @@ end
 
 class UnpermittedException < StandardError; end
 class UnauthorizedException < StandardError; end
-class CommentNotFoundException < StandardError; end
-class PostNotFoundException < StandardError; end
+class AnswerNotFoundException < StandardError; end
+class QuestionNotFoundException < StandardError; end
 class InvalidTokenException < StandardError; end

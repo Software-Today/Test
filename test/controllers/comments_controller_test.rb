@@ -1,74 +1,74 @@
 require 'test_helper'
 
-class CommentsControllerTest < ActionDispatch::IntegrationTest
+class AnswersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:leecrey)
-    @post = posts(:first)
-    @comment = comments(:first)
+    @user = users(:brett)
+    @question = questions(:first)
+    @answer = answers(:first)
     @crypt = MessageEncrypt.new
     @token = @crypt.encrypt @user.token_get
   end
 
   test 'should get index' do
-    get post_comments_path(@post), as: :json
+    get question_answers_path(@question), as: :json
     assert_response :success
   end
 
-  test 'should not create comment' do
+  test 'should not create answer' do
     @token += 'x'
-    assert_difference('Comment.count', 0) do
-      post post_comments_path(@post),
+    assert_difference('Answer.count', 0) do
+      question question_answers_path(@question),
       headers: { Authorization: @token },
-      params: { comment: { content: @comment.content, post_id: @comment.post_id, user_id: @comment.user_id } },
+      params: { answer: { body: @answer.body, question_id: @answer.question_id, user_id: @answer.user_id } },
       as: :json
     end
 
     assert_response :unauthorized
   end
 
-  test 'should create comment' do
-    assert_difference('Comment.count') do
-      post post_comments_path(@post),
+  test 'should create answer' do
+    assert_difference('Answer.count') do
+      question question_answers_path(@question),
       headers: { Authorization: @token },
-      params: { comment: { content: @comment.content, post_id: @comment.post_id, user_id: @comment.user_id } },
+      params: { answer: { body: @answer.body, question_id: @answer.question_id, user_id: @answer.user_id } },
       as: :json
     end
 
     assert_response :created
   end
 
-  test 'should not show comment' do
-    url = 'http://localhost:3000/comments/32'
+  test 'should not show answer' do
+    url = 'http://localhost:3000/answers/32'
     get url, as: :json
     assert_response :not_found
   end
 
-  test 'should show comment' do
-    get comment_url(@comment), as: :json
+  test 'should show answer' do
+    get answer_url(@answer), as: :json
     assert_response :success
   end
 
-  test 'should update comment' do
-    content = 'New content'
-    hash = { content: content, post_id: @comment.post_id, user_id: @comment.user_id }
-    patch comment_url(@comment), headers: { Authorization: @token }, params: { comment: hash }, as: :json
+  test 'should update answer' do
+    body = 'New body'
+    hash = { body: body, question_id: @answer.question_id, user_id: @answer.user_id }
+    patch answer_url(@answer), headers: { Authorization: @token }, params: { answer: hash }, as: :json
     assert_response :success
   end
 
-  test 'should not destroy comment' do
+  test 'should not destroy answer' do
     @token += 'x'
-    assert_difference('Comment.count', 0) do
-      delete comment_url(@comment), headers: { Authorization: @token }, as: :json
+    assert_difference('Answer.count', 0) do
+      delete answer_url(@answer), headers: { Authorization: @token }, as: :json
     end
 
     assert_response :unauthorized
   end
 
-  test 'should destroy comment' do
-    assert_difference('Comment.count', -1) do
-      delete comment_url(@comment), headers: { Authorization: @token }, as: :json
+  test 'should destroy answer' do
+    assert_difference('Answer.count', -1) do
+      delete answer_url(@answer), headers: { Authorization: @token }, as: :json
     end
 
-    assert_response :no_content
+    assert_response :no_body
   end
 end

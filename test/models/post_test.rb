@@ -1,25 +1,25 @@
 require 'test_helper'
 
-class PostTest < ActiveSupport::TestCase
+class QuestionTest < ActiveSupport::TestCase
   setup do
-    @lee_crey = users(:leecrey)
+    @brett = users(:brett)
   end
 
-  test 'should not create post without body and user id' do
-    assert_not Post.new.save, 'Post created without body and user id'
+  test 'should not create question without body and user id' do
+    assert_not Question.new.save, 'question created without body and user id'
   end
 
-  test 'should raise non null constrain exception without content' do
+  test 'should raise non null constrain exception without body' do
     assert_raises(ActiveRecord::NotNullViolation) do
-      Post.new(user_id: @lee_crey.id).save
+      Question.new(user_id: @brett.id).save
     end
   end
 
-  test 'should not create post without user id' do
-    assert_not Post.new(content: 'hello world').save, 'created post without user id'
+  test 'should not create question without user id' do
+    assert_not Question.new(body: 'hello world').save, 'created question without user id'
   end
 
-  test 'should create post' do
-    assert Post.new(content: 'hello world', user_id: @lee_crey.id).save, 'not able to create post' 
+  test 'should create question' do
+    assert Question.new(body: 'hello world', user_id: @brett.id).save, 'not able to create question' 
   end
 end

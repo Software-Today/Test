@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class Post < ApplicationRecord
+class Question < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
+  has_many :answers, dependent: :destroy
 
   self.per_page = 10
 end

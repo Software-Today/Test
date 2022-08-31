@@ -10,24 +10,24 @@ puts 'creating account ....'
   user.save
 end
 
-# POSTS
+# Qestions
 @user = User.first
-puts 'creating posts ....'
+puts 'creating questions ....'
 50.times do
   title = Faker::Lorem.sentence
-  content =  Faker::Lorem.sentence(word_count: 30)
-  hash = { title: title, content: content }
-  @user.posts.new(hash).save
+  body =  Faker::Lorem.sentence(word_count: 30)
+  hash = { title: title, body: body }
+  @user.questions.new(hash).save
 end
 
-# comments
-puts 'creating comment ....'
+# Answers
+puts 'creating answer ....'
 
-post = Post.first
+question = Question.first
 100.times do
-  content =  Faker::Lorem.sentence(word_count: 30)
-  hash = { content: content }
-  koment = post.comments.new(hash)
+  body =  Faker::Lorem.sentence(word_count: 30)
+  hash = { body: body }
+  koment = question.answers.new(hash)
   koment.user = User.second
   koment.save
 end
